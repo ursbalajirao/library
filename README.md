@@ -2,22 +2,22 @@
 # Getting Started
 
 ### Reference Documentation
-#To build application RUN 
+# To build application RUN 
 mvn clean package
 and RUN
 java -jar BUILD_FILE/library.jar
 
 API's
 
-#To get list of libraries
+# To get list of libraries
 Method Type : GET
 https://localhost:8080/api/library
 
-#To Books by library name 
+# To Books by library name 
 Method Type : GET
 https://localhost:8080/api/books-by-library
 
-#To Save Book details
+# To Save Book details
 https://localhost:8080/api/book 
 Method Type : POST
 Payload: {
@@ -42,7 +42,7 @@ Status Code:  200
        "bookDescription": "this is gaming book"
  }
 
- #To Delete Book details
+ # To Delete Book details
  Method Type:DELETE
  https://localhost:8080/api/book?id=1
  Response: "Book deleted successfully"
