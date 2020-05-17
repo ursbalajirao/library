@@ -31,5 +31,19 @@ public class LibraryTestService {
 		when(libraryRepository.findAll()).thenReturn(response);
 		assertEquals(response, libraryService.getAllLibraries());
 	}
+	
+	@Test
+	public void saveLibraryTest() {
+		Library obj=new Library();
+		when(libraryRepository.save(obj)).thenReturn(obj);
+		libraryService.saveLibrary(obj);
+	}
+	
+	@Test
+	public void getLibraryTest() {
+		Library obj=new Library();
+		when(libraryRepository.findBylibrary_name("test")).thenReturn(obj);
+		assertEquals(obj, libraryService.getLibrary("test"));
+	}
 
 }

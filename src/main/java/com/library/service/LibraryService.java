@@ -17,4 +17,12 @@ public class LibraryService {
 	public List<Library> getAllLibraries() {
 		return libraryRepository.findAll();
 	}
+
+	public Library getLibrary(String library_name) {
+		return libraryRepository.findBylibrary_name(library_name);
+	}
+
+	public void saveLibrary(Library libraryObj) {
+		libraryRepository.save(libraryObj);
+	}
 }

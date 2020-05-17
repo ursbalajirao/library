@@ -61,6 +61,13 @@ export class AppComponent implements OnInit{
     })
    
   }
+  refreshData(){
+	  this.getAPI();
+	  this.getBooksAPI(rowItem.library_name).subscribe(data => {
+      this.booksData = data;
+    })
+	  
+  }
   fillBookDetails(rowItem){
 	  console.log(this.currentLibrary)
 	  document.getElementById("book_title").value=rowItem.title;
@@ -71,15 +78,17 @@ export class AppComponent implements OnInit{
   }
   saveBook(){
 	let payLoad = {};
-	payLoad['title']=document.getElementById("book_title").value;
-	payLoad['book_description']=document.getElementById("book_description").value;
-	payLoad['author']=document.getElementById("book_author").value;
 	payLoad['library_name']=this.currentLibrary;
   	let title=document.getElementById("book_title").value;
 	let des=document.getElementById("book_description").value;
     let author=document.getElementById("book_author").value;
-	if (document.getElementById("book_id").value!=""){
-		payLoad['id']=document.getElementById("book_id").value;
+	let id=document.getElementById("book_id").value;
+	payLoad['title']=title
+	payLoad['book_description']=des;
+	payLoad['author']=author;
+
+	if (id!=""){
+		payLoad['id']=id;
 	}
 	console.log(payLoad);
 	let bookResponseData={};
@@ -87,7 +96,7 @@ export class AppComponent implements OnInit{
     this.http.post(url, payLoad, {headers: this.headers}).map((res: Response) => res.json()).subscribe(data => {
       this.bookResponseData = data;
     });
-	Swal.fire("Success", document.getElementById("book_title").value+' successfully saved.', 'success')
+	Swal.fire("Success", title+' successfully saved.', 'success')
 	console.log("response:"+bookResponseData);
   }
   selectRow(rowItem, ind){
