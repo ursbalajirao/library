@@ -1,0 +1,116 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <a class="navbar-brand" href="#">Logo</a>
+</nav>
+<div class="container-fluid main-div">
+  <div class="row">
+    <div class="col-sm-12 btns-div">
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="table-div col-sm-10">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Library Name</th>
+            <th>Location</th>
+            <th>No Of Books</th>
+            <th>Created Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of this.librariesData;let i = index;">
+            <tr (click)="selectRow(item, i)" id="rowID{{i}}" style="cursor: pointer;">
+              <td>{{item.id}}</td>
+              <td>{{item.library_name}}</td>
+              <td>{{item.location}}</td>
+              <td>{{item.no_of_books}}</td>
+              <td>{{item.created_date}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-12 btns-div"> 
+      <ng-container *ngIf="selectedLibraryArr.length > 0">
+      <input type="button" class="btn btn-secondary" (click)="openModal(template)" value="Add Book" />
+      </ng-container>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="table-div col-sm-10">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Book Description</th>
+            <th>Author</th>
+            <th>Library Name</th>
+			<th>Created Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of this.booksData;let i = index;">
+            <tr (click)="openModal(template);fillBookDetails(item)" id="rowID{{i}}" style="cursor: pointer;">
+              <td>{{item.id}}</td>
+              <td>{{item.title}}</td>
+              <td>{{item.book_description}}</td>
+              <td>{{item.author}}</td>
+			  <td>{{item.library_name}}</td>
+			  <td>{{item.created_date}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+ 
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Book Details</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide();">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div  style="height:50%;margin: 50px auto;">
+          <div>
+				<table>
+			<tr>
+				<input id="book_id" type="hidden" class="form-control" name="book_id" />
+				<input id="library_name" type="hidden" class="form-control" name="library_name"/>
+				<td>Title</td>
+				<td>
+					<input id="book_title" type="text" class="form-control" name="title" />
+				</td>
+			</tr>
+			<tr>
+				<td>Book Description</td>
+				<td>
+					<input id="book_description" type="text" class="form-control" name="bookDescription" />
+				</td>
+			</tr>
+			<tr>
+				<td>Author</td>
+				<td>
+					<input id="book_author" type="text" class="form-control" name="author" />
+				</td>
+			</tr>
+			</table>
+          </div>
+    
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="Cancel" aria-label="Close" (click)="modalRef.hide();" class="btn btn-danger" />
+        <input type="button" value="Save" (click)="saveBook();modalRef.hide();" class="btn btn-primary" />
+      <ng-container *ngIf="fileUploadAPIStatus">
+        <input type="button" value="Okay" aria-label="Close" (click)="modalRef.hide();" class="btn btn-primary" />
+      </ng-container>
+
+      
+    </div>
+  </ng-template>
+</div>

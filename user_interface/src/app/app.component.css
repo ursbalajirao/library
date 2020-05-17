@@ -1,0 +1,51 @@
+.custom-cls input[type="radio"] {
+	display: none;
+}
+.custom-cls label {
+	position: relative;
+	display: inline-block;
+	padding: 3px 4px 6px 20px;
+	cursor: pointer;
+}
+.custom-cls{
+    margin-right: 2%;
+}
+.custom-cls label::before,
+.custom-cls label::after {
+	position: absolute;
+	content: '';
+	top: 50%;
+	border-radius: 100%;
+	-webkit-transition: all .2s;
+	transition: all .2s;
+}
+.custom-cls label::before {
+	left: 0;
+	width: 14px;
+	height: 14px;
+	margin-top: -8px;
+	background: #f3f3f3;
+	border: 1px solid #ccc;
+}
+.custom-cls label:hover::before {
+	background: #fff;
+}
+.custom-cls label::after {
+	opacity: 0;
+	left: 3px;
+	width: 8px;
+	height: 8px;
+	margin-top: -5px;
+	background: #3498db;
+	-webkit-transform: scale(2);
+	transform: scale(2);
+}
+.custom-cls input[type="radio"]:checked + label::before {
+	background: #fff;
+	border: 1px solid #3498db;
+}
+.custom-cls input[type="radio"]:checked + label::after {
+	opacity: 1;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
