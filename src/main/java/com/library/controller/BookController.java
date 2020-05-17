@@ -3,6 +3,7 @@ package com.library.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.library.model.Book;
 import com.library.service.BookService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api")
 public class BookController {
 
@@ -27,13 +29,13 @@ public class BookController {
 
     @RequestMapping(value = "/book", method = RequestMethod.POST)
     public Book addBook(@RequestBody Book book){
-        Book response = applicationService.save(book);
+        Book response = applicationService.save(book,"CREATE");
         return response;
     }
 
     @RequestMapping(value = "/book", method = RequestMethod.PUT)
     Book updateBook(@RequestBody Book book){
-        Book response = applicationService.save(book);
+        Book response = applicationService.save(book,"UPDATE");
         return response;
     }
 

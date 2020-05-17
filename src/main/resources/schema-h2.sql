@@ -1,6 +1,6 @@
 CREATE TABLE BOOKS
         (
-        id NUMBER(10) NOT NULL,
+        id NUMBER(10) NOT NULL primary key AUTO_INCREMENT,
         title VARCHAR2(50) NOT NULL,
         author VARCHAR2(50) NOT NULL,
         book_description VARCHAR2(500),
@@ -13,7 +13,7 @@ CREATE TABLE BOOKS
         
 CREATE TABLE LIBRARY
         (
-        id NUMBER(10) NOT NULL,
+        id NUMBER(10) NOT NULL primary key AUTO_INCREMENT,
         library_name VARCHAR2(50) NOT NULL,
         location VARCHAR2(50) NOT NULL,
         no_of_books NUMBER(10),

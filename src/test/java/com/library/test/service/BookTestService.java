@@ -15,8 +15,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.library.model.Book;
+import com.library.model.Library;
 import com.library.repo.BookRepository;
 import com.library.service.BookService;
+import com.library.service.LibraryService;
 
 @ExtendWith(MockitoExtension.class)
 public class BookTestService {
@@ -27,6 +29,8 @@ public class BookTestService {
 	@Mock
 	BookRepository bookRepository;
 	
+	@InjectMocks
+	LibraryService libraryService;
 	
 	@Test
 	public void findByIdTest() {
@@ -39,17 +43,23 @@ public class BookTestService {
 	public void saveBookTest() {
 		Book bookObj = new Book();
 		bookObj.setId(1);
-		bookObj.setAuthor("balajirao");
-		bookObj.setBook_description("NA");
-		bookObj.setLanguage("Telugu");
-		bookObj.setLibrary_name("BLR-BOOK-HUB");
-		bookObj.setTitle("Na chavu nenu chastha nekenduku");
-		bookObj.setBook_type("LOVE");
-		bookObj.setCreated_date(LocalDate.now());
+		bookObj.setLibrary_name("HYD-BOOK-HUB");
 		when(bookRepository.save(bookObj)).thenReturn(bookObj);
-		assertEquals(bookObj, applicationService.save(bookObj));
+		assertEquals(bookObj, applicationService.save(bookObj,"CREATE"));
+
 	}
 
+	@Test
+	public void SaveLibraryTest() {
+		Book bookObj=new Book();
+		bookObj.setLibrary_name("HYD-BOOK-HUB");
+		Library libObj=new Library();
+		libObj.setId(1);
+		libObj.setLibrary_name("HYD-BOOK-HUB");
+		libObj.setNo_of_books(1);
+		when(libraryService.getLibrary(bookObj.getLibrary_name())).thenReturn(libObj);
+		libObj.setNo_of_books(libObj.getNo_of_books()+1);
+	}
 	@Test
 	public void deleteBookTestOne() {
 		String response = "Book deleted successfully";

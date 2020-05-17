@@ -49,7 +49,7 @@
             <th>Book Description</th>
             <th>Author</th>
             <th>Library Name</th>
-			<th>Created Date</th>
+			<th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -107,7 +107,7 @@
         <input type="button" value="Cancel" aria-label="Close" (click)="modalRef.hide();" class="btn btn-danger" />
         <input type="button" value="Save" (click)="saveBook();modalRef.hide();" class="btn btn-primary" />
       <ng-container *ngIf="fileUploadAPIStatus">
-        <input type="button" value="Okay" aria-label="Close" (click)="modalRef.hide();" class="btn btn-primary" />
+        <input type="button" value="Okay" aria-label="Close" (click)="modalRef.hide();refreshData()" class="btn btn-primary" />
       </ng-container>
 
       
